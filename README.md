@@ -21,24 +21,44 @@ A baseline performance tier is set based on your provisioned disk size. You can 
 | 16 TiB | P70 | P70, P80 |
 | 32 TiB | P80 | P80 |
 
-# Prerequisite
+## Prerequisite
 
-You must get the feature enabled for your subscriptions. Please [sign up](https://aka.ms/perftiersignup) for access to our private preview.
+You must get the feature enabled for your subscriptions before you can use performance tier. Please [sign up](https://aka.ms/perftiersignup) for access to our private preview.
 
-## Create a data disk with Performance Tier 
+## Create/update a data disk with a tier higher than the baseline tier
 
-1. Create a data disk with Performance Tier using the sample template [CreateVMWithDisksEncryptedInTransitAtRestWithPMK.json](https://github.com/ramankumarlive/manageddisksendtoendencryptionpreview/blob/master/CreateVMWithDisksEncryptedInTransitAtRestWithPMK.json)
+Create an empty data disk with a tier higher than the baseline tier or update the tier of a disk higher than the baseline tier using the sample template [CreateUpdateDataDiskWithTier.json](https://github.com/Azure/azure-managed-disks-performance-tiers/blob/main/CreateUpdateDataDiskWithTier.json)
 
  ```PowerShell
- $password=ConvertTo-SecureString -String "Password@123" -AsPlainText -Force
- New-AzResourceGroupDeployment -ResourceGroupName CMKTesting `
-   -TemplateUri "https://raw.githubusercontent.com/ramankumarlive/manageddisksendtoendencryptionpreview/master/CreateVMWithDisksEncryptedInTransitAtRestWithPMK.json" `
-   -virtualMachineName "ramane2evm12" `
-   -adminPassword $password `
-   -vmSize "Standard_DS3_V2" `
-   -region "CentralUSEUAP"
+ New-AzResourceGroupDeployment -ResourceGroupName yourResourceGroupName `
+   -TemplateUri "https://raw.githubusercontent.com/Azure/azure-managed-disks-performance-tiers/main/CreateUpdateDataDiskWithTier.json" `
+   -diskName "yourDiskName" `
+   -dataDiskSizeInGb 32 `
+   -performanceTier "P30" `
+   -region "EastUS2EUAP"
  ```
- 
+## Create/update a OS disk with a tier higher than the baseline tier
+
+Create an OS disk from a marketplace image or update the tier of a OS disk higher than the baseline tier using the sample template [CreateUpdateOSDiskWithTier.json](https://github.com/Azure/azure-managed-disks-performance-tiers/blob/main/CreateUpdateOSDiskWithTier.json)
+
+ ```PowerShell
+ New-AzResourceGroupDeployment -ResourceGroupName yourResourceGroupName `
+   -TemplateUri "https://raw.githubusercontent.com/Azure/azure-managed-disks-performance-tiers/main/CreateUpdateOSDiskWithTier.json" `
+   -diskName "yourDiskName" `
+   -performanceTier "P30" `
+   -region "EastUS2EUAP"
+ ```
+## Create a VM with tier higher than the baseline tier set for OS and data disks
+
+Create a VM with tier set for OS and data disks using the sample template [CreateVMWithDisksUsingTier.json](https://github.com/Azure/azure-managed-disks-performance-tiers/blob/main/CreateVMWithDisksUsingTier.json)
+
+ ```PowerShell
+ New-AzResourceGroupDeployment -ResourceGroupName yourResourceGroupName `
+   -TemplateUri "https://raw.githubusercontent.com/Azure/azure-managed-disks-performance-tiers/main/CreateVMWithDisksUsingTier.json" `
+   -diskName "yourDiskName" `
+   -performanceTier "P30" `
+   -region "EastUS2EUAP"
+ ```
 ## Contributing
 
 This project welcomes contributions and suggestions.  Most contributions require you to agree to a
