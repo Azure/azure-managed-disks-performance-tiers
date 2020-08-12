@@ -25,7 +25,21 @@ A baseline performance tier is set based on your provisioned disk size. You can 
 
 You must get the feature enabled for your subscriptions. Please [sign up](https://aka.ms/perftiersignup) for access to our private preview.
 
-# Contributing
+## Create a data disk with Performance Tier 
+
+1. Create a data disk with Performance Tier using the sample template [CreateVMWithDisksEncryptedInTransitAtRestWithPMK.json](https://github.com/ramankumarlive/manageddisksendtoendencryptionpreview/blob/master/CreateVMWithDisksEncryptedInTransitAtRestWithPMK.json)
+
+ ```PowerShell
+ $password=ConvertTo-SecureString -String "Password@123" -AsPlainText -Force
+ New-AzResourceGroupDeployment -ResourceGroupName CMKTesting `
+   -TemplateUri "https://raw.githubusercontent.com/ramankumarlive/manageddisksendtoendencryptionpreview/master/CreateVMWithDisksEncryptedInTransitAtRestWithPMK.json" `
+   -virtualMachineName "ramane2evm12" `
+   -adminPassword $password `
+   -vmSize "Standard_DS3_V2" `
+   -region "CentralUSEUAP"
+ ```
+ 
+## Contributing
 
 This project welcomes contributions and suggestions.  Most contributions require you to agree to a
 Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
@@ -39,7 +53,7 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
-# Legal Notices
+## Legal Notices
 
 Microsoft and any contributors grant you a license to the Microsoft documentation and other content
 in this repository under the [Creative Commons Attribution 4.0 International Public License](https://creativecommons.org/licenses/by/4.0/legalcode),
