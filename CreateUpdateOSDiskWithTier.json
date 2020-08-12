@@ -43,7 +43,7 @@
           "name": "Premium_LRS"
         },
         "properties": {
-          creationData": {
+          "creationData": {
             "createOption": "FromImage",
             "imageReference": {
               "id": "[concat('/Subscriptions/', subscription().subscriptionId, '/Providers/Microsoft.Compute/Locations/', parameters('region'), '/Publishers/MicrosoftWindowsServer/ArtifactTypes/VMImage/Offers/WindowsServer/Skus/2019-Datacenter-smalldisk/Versions/latest')]"
