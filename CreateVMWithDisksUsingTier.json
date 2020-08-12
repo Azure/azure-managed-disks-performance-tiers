@@ -118,7 +118,7 @@
           "imageReference": "[variables('imageReference')]",
           "osDisk": {
             "name": "[variables('diskName')]",
-            "tier": "P10"
+            "tier": "P10",
             "createOption": "FromImage",
             "managedDisk": {
               "storageAccountType": "Premium_LRS"
@@ -132,10 +132,7 @@
               "lun": "0",
               "createOption": "Empty",
               "managedDisk": {
-                "storageAccountType": "Premium_LRS",
-                "diskEncryptionSet": {
-                  "id": "[parameters('diskEncryptionSetId')]"
-                }
+                "storageAccountType": "Premium_LRS"
               }
             }
           ]
