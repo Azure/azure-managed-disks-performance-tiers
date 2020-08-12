@@ -27,38 +27,49 @@ You must get the feature enabled for your subscriptions before you can use perfo
 
 ## Create/update a data disk with a tier higher than the baseline tier
 
-Create an empty data disk with a tier higher than the baseline tier or update the tier of a disk higher than the baseline tier using the sample template [CreateUpdateDataDiskWithTier.json](https://github.com/Azure/azure-managed-disks-performance-tiers/blob/main/CreateUpdateDataDiskWithTier.json)
+1. Create an empty data disk with a tier higher than the baseline tier or update the tier of a disk higher than the baseline tier using the sample template [CreateUpdateDataDiskWithTier.json](https://github.com/Azure/azure-managed-disks-performance-tiers/blob/main/CreateUpdateDataDiskWithTier.json)
 
- ```PowerShell
- New-AzResourceGroupDeployment -ResourceGroupName yourResourceGroupName `
-   -TemplateUri "https://raw.githubusercontent.com/Azure/azure-managed-disks-performance-tiers/main/CreateUpdateDataDiskWithTier.json" `
-   -diskName "yourDiskName" `
-   -dataDiskSizeInGb 32 `
-   -performanceTier "P30" `
-   -region "EastUS2EUAP"
+ ```cli
+ subscriptionId=dd80b94e-0463-4a65-8d04-c94f403879dc
+ resourceGroupName=perftiertesting
+ diskName=myDataDiskwithperftier1
+ diskSize=128
+ performanceTier=P50
+ region=EastUS2EUAP
+
+ az login
+
+ az account set --subscription $subscriptionId
+
+ az group deployment create -g $resourceGroupName \
+ --template-uri "https://raw.githubusercontent.com/Azure/azure-managed-disks-performance-tiers/main/CreateUpdateDataDiskWithTier.json" \
+ --parameters "region=$region" "diskName=$diskName" "performanceTier=$performanceTier" "dataDiskSizeInGb=$diskSize"
+ ```
+
+2. Confirm the tier of the disk
+```cli
+az resource show -n $diskName -g $resourceGroupName --namespace Microsoft.Compute --resource-type disks --api-version 2020-06-30 --query [properties.tier] -o tsv
  ```
 ## Create/update a OS disk with a tier higher than the baseline tier
 
-Create an OS disk from a marketplace image or update the tier of a OS disk higher than the baseline tier using the sample template [CreateUpdateOSDiskWithTier.json](https://github.com/Azure/azure-managed-disks-performance-tiers/blob/main/CreateUpdateOSDiskWithTier.json)
+1. Create an OS disk from a marketplace image or update the tier of a OS disk higher than the baseline tier using the sample template [CreateUpdateOSDiskWithTier.json](https://github.com/Azure/azure-managed-disks-performance-tiers/blob/main/CreateUpdateOSDiskWithTier.json)
 
- ```PowerShell
- New-AzResourceGroupDeployment -ResourceGroupName yourResourceGroupName `
-   -TemplateUri "https://raw.githubusercontent.com/Azure/azure-managed-disks-performance-tiers/main/CreateUpdateOSDiskWithTier.json" `
-   -diskName "yourDiskName" `
-   -performanceTier "P30" `
-   -region "EastUS2EUAP"
+ ```cli
+ resourceGroupName=perftiertesting
+ diskName=myOSdiskwithperftier1
+ performanceTier=P30
+ region=EastUS2EUAP
+
+ az group deployment create -g $resourceGroupName \
+ --template-uri "https://raw.githubusercontent.com/Azure/azure-managed-disks-performance-tiers/main/CreateUpdateOSDiskWithTier.json" \
+ --parameters "region=$region" "diskName=$diskName" "performanceTier=$performanceTier"
  ```
-## Create a VM with tier higher than the baseline tier set for OS and data disks
-
-Create a VM with tier set for OS and data disks using the sample template [CreateVMWithDisksUsingTier.json](https://github.com/Azure/azure-managed-disks-performance-tiers/blob/main/CreateVMWithDisksUsingTier.json)
-
- ```PowerShell
- New-AzResourceGroupDeployment -ResourceGroupName yourResourceGroupName `
-   -TemplateUri "https://raw.githubusercontent.com/Azure/azure-managed-disks-performance-tiers/main/CreateVMWithDisksUsingTier.json" `
-   -diskName "yourDiskName" `
-   -performanceTier "P30" `
-   -region "EastUS2EUAP"
+ 
+ 2. Confirm the tier of the disk
+ ```cli
+ az resource show -n $diskName -g $resourceGroupName --namespace Microsoft.Compute --resource-type disks --api-version 2020-06-30 --query [properties.tier] -o tsv
  ```
+ 
 ## Contributing
 
 This project welcomes contributions and suggestions.  Most contributions require you to agree to a
