@@ -33,6 +33,10 @@ You must get the feature enabled for your subscriptions before you can use perfo
 5. South East Australia 
 6. South India
 
+## Restrictions
+1. Disks should not be attached to running VMs while changing tier.
+2. You have to resize a disk to size greater than 4096 GiB to use P60, P70, P80 tiers. 
+
 ## Create/update a data disk with a tier higher than the baseline tier
 
 1. Create an empty data disk with a tier higher than the baseline tier or update the tier of a disk higher than the baseline tier using the sample template [CreateUpdateDataDiskWithTier.json](https://github.com/Azure/azure-managed-disks-performance-tiers/blob/main/CreateUpdateDataDiskWithTier.json)
