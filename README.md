@@ -25,6 +25,14 @@ A baseline performance tier is set based on your provisioned disk size. You can 
 
 You must get the feature enabled for your subscriptions before you can use performance tier. Please [sign up](https://aka.ms/perftiersignup) for access to our private preview.
 
+## Regions supported
+1. West Central US 
+2. East 2 US 
+3. Europe West
+4. East Australia 
+5. South East Australia 
+6. South India
+
 ## Create/update a data disk with a tier higher than the baseline tier
 
 1. Create an empty data disk with a tier higher than the baseline tier or update the tier of a disk higher than the baseline tier using the sample template [CreateUpdateDataDiskWithTier.json](https://github.com/Azure/azure-managed-disks-performance-tiers/blob/main/CreateUpdateDataDiskWithTier.json)
