@@ -132,7 +132,7 @@
             {
               "name": "[variables('dataDiskName')]",
               "diskSizeGB": "128",
-              "tier": "P30",
+              "tier": "P20",
               "lun": "0",
               "createOption": "Empty",
               "managedDisk": {
