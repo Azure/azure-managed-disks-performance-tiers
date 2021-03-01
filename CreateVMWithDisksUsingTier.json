@@ -38,11 +38,8 @@
         },
         "dataDiskSizeInGb": {
             "type": "int",
-            "minValue": 256,
+            "minValue": 4,
             "maxValue": 32767,
-            "metadata": {
-                "description": "Size of shared data disk for cluster in GB (Min=256, Max=32767)"
-            },
             "defaultValue": 128
         }, 
         "dataDiskPerformanceTier": {
