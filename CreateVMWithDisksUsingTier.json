@@ -50,7 +50,6 @@
             },
             "defaultValue": 128
         }, 
-      ,
         "dataDiskPerformanceTier": {
           "type": "string",
           "allowedValues": [
