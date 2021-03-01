@@ -10,6 +10,10 @@
       "type": "securestring",
       "defaultValue": ""
     },
+    "adminUsername": {
+      "type": "string",
+      "defaultValue": "adminUserIsTest"
+    },
     "vmSize": {
       "type": "string",
       "defaultValue": "Standard_DS3_V2"
@@ -108,7 +112,7 @@
       "properties": {
         "osProfile": {
           "computerName": "[parameters('virtualMachineName')]",
-          "adminUsername": "adminUserIsTest",
+          "adminUsername": "[parameters('adminUsername')]",
           "adminPassword": "[parameters('adminPassword')]"
         },
         "hardwareProfile": {
